@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    #message = "Salut tout le monde !"
-    #return HttpResponse(message)
-    template = loader.get_template('library/index.html')
-    return HttpResponse(template.render(request=request))
+    message = "Salut tout le monde !"
+    return HttpResponse(message)
+    #template = loader.get_template('library/index.html')
+    #return HttpResponse(template.render(request=request))
