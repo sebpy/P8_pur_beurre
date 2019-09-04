@@ -1,6 +1,7 @@
 django
 psycopg2
 Argon2
+requests
 pylint
 pytest
 pytest-cov

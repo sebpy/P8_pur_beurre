@@ -22,6 +22,7 @@ from library import views
 
 urlpatterns = [
     url(r'^$', views.index),
+    url(r'^import_data/', views.import_data),
     url(r'^library/', include('library.urls')),
     url(r'^admin/', admin.site.urls),
 ]
