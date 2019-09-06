@@ -10684,6 +10684,10 @@ header.masthead h1 {
   -webkit-text-stroke-color: #848181;
 }
 
+header.masthead.sub {
+   height: 20vh !important;
+   min-height: 20rem !important;
+}
 
 @media (min-width: 992px) {
   header.masthead {
@@ -10787,8 +10791,8 @@ header.masthead h1 {
 }
 
 .list img {
-    max-height:150px;
     border-radius:1rem;
+    height:150px;
     max-width: 70%;
 }
 
@@ -10804,4 +10808,35 @@ header.masthead h1 {
 .paginate {
     text-align: center;
     margin-top: 15px;
+}
+
+.round-score {
+    border-radius: 50%;
+    border: 2px solid white;
+    height: 2.8rem;
+    width: 2.8rem;
+    text-transform: uppercase;
+    position: absolute;
+    top: -32px;
+    right: -18px;
+}
+
+.round-score-1 {
+    background-color: #038141;
+}
+
+.round-score-2 {
+    background-color: #85BB2F;
+}
+
+.round-score-3 {
+    background-color: rgb(202, 162, 0);
+}
+
+.round-score-4 {
+    background-color: #EE8100;
+}
+
+.round-score-5 {
+    background-color: #E63E11;
 }
