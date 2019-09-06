@@ -1,40 +1,33 @@
 from django.shortcuts import render, get_object_or_404
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import ProductCategories, Products
 from django.template import loader
-from django.http import HttpResponse
 
 
 def index(request):
-    template = loader.get_template('library/index.html')
-    return HttpResponse(template.render(request=request))
+    return render(request, 'library/index.html')
 
 
 def search(request):
-    query = request.GET.get('search')
-    if not query:
-        products = Products.objects.all()
-    else:
-        # title contains the query and query is not sensitive to case.
-        products = Products.objects.filter(name_product__icontains=query)
-
-
-    products = ["<li>{}</li>".format(product.name_product) for product in products]
-    message = """
-            Nous avons trouvé les albums correspondant à votre requête ! Les voici :
-            <ul>{}</ul>
-        """.format("</li><li>".join(products))
-
-    return HttpResponse(message)
-
-def search(request):
-    query = request.GET.get('search')
+    query = request.GET.get('query')
     if not query:
         products = Products.objects.all()
     else:
         products = Products.objects.filter(name_product__icontains=query)
+
+    paginator = Paginator(products, 9)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
 
     context = {
-        'name_product': products,
+        'products': products,
+        'query': query,
+        'paginate': True
     }
-    return render(request, 'library/search.html', locals())
+    return render(request, 'library/search.html', context)

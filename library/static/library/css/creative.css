@@ -1303,7 +1303,7 @@ pre code {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 33.33333%;
     flex: 0 0 33.33333%;
-    max-width: 33.33333%;
+    max-width: 31%;
   }
   .col-lg-5 {
     -webkit-box-flex: 0;
@@ -10684,6 +10684,7 @@ header.masthead h1 {
   -webkit-text-stroke-color: #848181;
 }
 
+
 @media (min-width: 992px) {
   header.masthead {
     height: 100vh;
@@ -10772,4 +10773,35 @@ header.masthead h1 {
 
 .search-bar {
     margin-top:50px;
+}
+
+.list {
+    display:inline-block;
+    border: 0.2rem solid rgba(52, 90, 97, 0.2);
+    background-color: rgba(52, 90, 97, 0.2);
+    margin-bottom:5px;
+    border-radius:10px;
+    padding:15px;
+    max-height:250px;
+    margin:1%;
+}
+
+.list img {
+    max-height:150px;
+    border-radius:1rem;
+    max-width: 70%;
+}
+
+.product-name {
+    height:30px;
+    margin-top:5px;
+}
+
+.save {
+    margin-top:5px;
+}
+
+.paginate {
+    text-align: center;
+    margin-top: 15px;
 }
