@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import ProductCategories, Products
+from .models import ProductCategorie, Product
 from django.template import loader
 
 
@@ -9,12 +9,27 @@ def index(request):
     return render(request, 'library/index.html')
 
 
+def detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    context = {
+        'name_product': product.name_product,
+        'nutriscore_product': product.nutriscore_product,
+        'fat_100g': product.fat_100g,
+        'sugars_100g': product.sugars_100g,
+        'saturated_fat_100g': product.saturated_fat_100g,
+        'salt_100g': product.salt_100g,
+        'image_product': product.image_product,
+        'link_product': product.link_product
+    }
+    return render(request, 'library/detail.html', context)
+
+
 def search(request):
     query = request.GET.get('query')
     if not query:
-        products = Products.objects.all()
+        products = Product.objects.all()
     else:
-        products = Products.objects.filter(name_product__icontains=query)
+        products = Product.objects.filter(name_product__icontains=query)
 
     paginator = Paginator(products, 9)
     page = request.GET.get('page')

@@ -1,7 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
-from library.models import ProductCategories, Products
+from library.models import ProductCategorie, Product
 import math
 import requests as rq
+
 
 class Command(BaseCommand):
     help = 'Import datas from api OFF'
@@ -13,14 +14,6 @@ class Command(BaseCommand):
         print("Démarrage de la mise à jour...")
 
         off_cat = 'https://fr.openfoodfacts.org/categories.json'
-        off_url = 'https://fr.openfoodfacts.org'
-        nutriscore = {0: 'N/A',
-                      1: 'A',
-                      2: 'B',
-                      3: 'C',
-                      4: 'D',
-                      5: 'E'
-                      }
 
         def get_data_api(url):
             """" Get all data from api OpenFoodFacts """
@@ -35,7 +28,7 @@ class Command(BaseCommand):
             for data in get_data["tags"]:
 
                 if data["products"] in range(55, 60) and 'en:' in data['id']:
-                    category = ProductCategories.objects.create(name_category=data["name"], link_category=data["url"])
+                    category = ProductCategorie.objects.create(name_category=data["name"], link_category=data["url"])
                     category.save()
 
         def products_table(id_categories, url_categories):
@@ -57,22 +50,30 @@ class Command(BaseCommand):
                         product_mane = "N/A"
 
                     try:
-                        product_brand = product["brands"]
+                        fat_100g = product["nutriments"]["fat_100g"]
                     except KeyError:
-                        product_brand = "N/A"
+                        fat_100g = "N/A"
 
                     try:
-                        product_description = str(product["ingredients_text_fr"])
+                        sugars_100g = product["nutriments"]["sugars_100g"]
                     except KeyError:
-                        product_description = "N/A"
+                        sugars_100g = "N/A"
 
                     try:
-                        nutri_grade = product["nutrition_grade_fr"]
-                        product_nutriscore = list(nutriscore.keys())[
-                            list(nutriscore.values()).index(nutri_grade.upper())]
+                        saturated_fat_100g = product["nutriments"]["saturated-fat_100g"]
+                    except KeyError:
+                        saturated_fat_100g = "N/A"
+
+                    try:
+                        salt_100g = product["nutriments"]["salt_100g"]
+                    except KeyError:
+                        salt_100g = "N/A"
+
+                    try:
+                        product_nutriscore = product["nutrition_grade_fr"]
 
                     except KeyError:
-                        product_nutriscore = "5"
+                        product_nutriscore = "e"
 
                     try:
                         product_link = product["url"]
@@ -85,12 +86,14 @@ class Command(BaseCommand):
                         product_img = ""
 
                     try:
-                        product = Products.objects.create(
+                        product = Product.objects.create(
                             name_product=product_mane,
-                            brand_product=product_brand,
-                            id_categories=id_categories,
-                            description_product=product_description[:200],
+                            categorie_id=id_categories,
                             nutriscore_product=product_nutriscore,
+                            fat_100g=fat_100g,
+                            sugars_100g=sugars_100g,
+                            saturated_fat_100g=saturated_fat_100g,
+                            salt_100g=salt_100g,
                             image_product=product_img,
                             link_product=product_link,
                         )
@@ -103,7 +106,7 @@ class Command(BaseCommand):
                         print(msg)
 
         categories_table(off_cat)
-        categories_product = ProductCategories.objects.all()
+        categories_product = ProductCategorie.objects.all()
 
         for data in categories_product:
             id_cate = data.id

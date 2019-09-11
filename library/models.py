@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class ProductCategories(models.Model):
+class ProductCategorie(models.Model):
     name_category = models.CharField(max_length=200)
     link_category = models.URLField()
 
@@ -9,22 +9,15 @@ class ProductCategories(models.Model):
         return self.name_category
 
 
-class Products(models.Model):
-    NUTRI_GRADE = (
-        (0, "N/A"),
-        (1, "A"),
-        (2, "B"),
-        (3, "C"),
-        (4, "D"),
-        (5, "E"),
-    )
+class Product(models.Model):
 
     name_product = models.CharField(max_length=250)
-    brand_product = models.CharField(max_length=250)
-    #id_categories = models.ForeignKey(ProductCategories, on_delete=models.CASCADE)
-    id_categories = models.CharField(max_length=11)
-    description_product = models.CharField(max_length=200, blank=True)
-    nutriscore_product = models.SmallIntegerField(choices=NUTRI_GRADE, default=0, blank=True)
+    categorie = models.ForeignKey(ProductCategorie, on_delete=models.CASCADE)
+    nutriscore_product = models.CharField(max_length=1, blank=False)
+    fat_100g = models.CharField(max_length=10, blank=True)
+    sugars_100g = models.CharField(max_length=10, blank=True)
+    saturated_fat_100g = models.CharField(max_length=10, blank=True)
+    salt_100g = models.CharField(max_length=20, blank=True)
     image_product = models.URLField(blank=True)
     link_product = models.URLField(blank=True)
 
@@ -41,4 +34,4 @@ class Users(models.Model):
 class UserSaveProduct(models.Model):
     id_user = models.IntegerField(null=True)
     id_product = models.IntegerField(null=True)
-    save_product = models.ForeignKey(ProductCategories, on_delete=models.CASCADE)
+    save_product = models.ForeignKey(ProductCategorie, on_delete=models.CASCADE)
