@@ -1,8 +1,16 @@
 from django.shortcuts import render, get_object_or_404
-
+from django import forms
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .models import ProductCategorie, Product
-from django.template import loader
+from django.contrib import messages
+
+
+class ContactForm(forms.Form):
+    query = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        required=False
+        )
 
 
 def index(request):
@@ -25,24 +33,31 @@ def detail(request, product_id):
 
 
 def search(request):
-    query = request.GET.get('query')
+
+    query = request.GET.get('query', '')
     if not query:
-        products = Product.objects.all()
+        messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> ERREUR!</strong><br>'
+                                'Vous devez entrer un aliment à rechercher.', extra_tags='safe')
+
+        return render(request, 'library/index.html')
+
     else:
         products = Product.objects.filter(name_product__icontains=query)
 
-    paginator = Paginator(products, 9)
-    page = request.GET.get('page')
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
+        paginator = Paginator(products, 9)
+        page = request.GET.get('page')
 
-    context = {
-        'products': products,
-        'query': query,
-        'paginate': True
-    }
-    return render(request, 'library/search.html', context)
+        try:
+            products = paginator.page(page)
+        except PageNotAnInteger:
+            products = paginator.page(1)
+        except EmptyPage:
+            products = paginator.page(paginator.num_pages)
+
+        context = {
+            'products': products,
+            'query': query,
+            'paginate': True
+        }
+        return render(request, 'library/search.html', context)
+

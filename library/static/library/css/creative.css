@@ -10377,6 +10377,7 @@ button.bg-dark:focus {
   text-shadow: 0 1px #848181, 1px 0 1px;
   font-size: 2rem;
   color: #fff !important;
+  margin-bottom:50px;
 }
 
 .text-primary {
@@ -10781,10 +10782,6 @@ header.masthead h1 {
     padding-top:5px;
 }
 
-.search-bar {
-    margin-top:50px;
-}
-
 .list {
     display:inline-block;
     border: 0.2rem solid rgba(52, 90, 97, 0.2);
@@ -10879,4 +10876,12 @@ h1.product-detail {
 
 .mg-b-20 {
     margin-bottom:20px;
+}
+
+.pop {
+    position: absolute;
+    right: 1%;
+    width: 28%;
+    z-index: 10;
+    top: 15px;
 }
