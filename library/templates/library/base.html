@@ -51,12 +51,21 @@
           <li>
               {% include 'library/search_form.html' %}
           </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about"><i class="fas fa-user"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#services"><i class="fas fa-carrot"></i></a>
-          </li>
+          {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="{% url 'profile' %}"><i class="fas fa-user"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href=""><i class="fas fa-carrot"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+              </li>
+          {% else %}
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a>
+              </li>
+          {% endif %}
         </ul>
       </div>
     </div>

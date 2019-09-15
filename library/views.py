@@ -1,16 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from django import forms
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import ProductCategorie, Product
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.db import IntegrityError
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-
-class ContactForm(forms.Form):
-    query = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
-        required=False
-        )
+from .models import Product
+from .forms import LoginForm, RegisterForm
 
 
 def index(request):
@@ -61,3 +57,94 @@ def search(request):
         }
         return render(request, 'library/search.html', context)
 
+
+def login_page(request):
+    form_login = LoginForm()
+    context = {
+        "formLogin": form_login,
+    }
+    return render(request, 'library/login.html', context)
+
+
+def login_user(request):
+    form_login = LoginForm()
+    context = {
+        "formLogin": form_login,
+    }
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                messages.success(request, '<strong><i class="fas fa-exclamation-triangle"></i> Succès!</strong><br>'
+                                          'Vous êtes connecté avec succès.', extra_tags='safe')
+
+                return render(request, 'library/profile.html')
+
+            else:
+                messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
+                                        'Login ou mot de passe invalide.', extra_tags='safe')
+
+                return render(request, 'library/login.html', context)
+    else:
+        return render(request, 'library/login.html', context)
+
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, '<strong><i class="fas fa-exclamation-triangle"></i> Succès!</strong><br>'
+                              'Vous avez été déconnecté avec succès.', extra_tags='safe')
+
+    return render(request, 'library/index.html')
+
+
+def profile(request):
+    return render(request, 'library/profile.html')
+
+
+def register(request):
+    form_register = RegisterForm()
+    context = {
+        "formRegister": form_register
+    }
+    try:
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password1 = form.cleaned_data.get('password1')
+                password2 = form.cleaned_data.get('password2')
+                email = form.cleaned_data.get('email')
+                if password2 != password1:
+                    messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
+                                            'Les mot de passe sont différent', extra_tags='safe')
+                else:
+                    user = User.objects.create_user(username=username,
+                                                    email=email,
+                                                    password=password1)
+
+                    User.objects.create(user=user)
+                    user = authenticate(request, username=username, password=password1)
+                    if user:
+                        login(request, user)
+
+                        return render(request, 'library/profile.html')
+                    else:
+                        messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
+                                                'Vous devez remplir tous les champs.', extra_tags='safe')
+
+        else:
+            return render(request, 'library/register.html', context)
+
+    except IntegrityError:
+        messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
+                                'Cette utilisateur existe déjà.', extra_tags='safe')
+
+        return render(request, 'library/register.html', context)
+
+    return render(request, 'library/register.html', context)

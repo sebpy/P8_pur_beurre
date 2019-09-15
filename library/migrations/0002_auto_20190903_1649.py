@@ -11,27 +11,27 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='products',
+            model_name='library',
             name='image_product',
             field=models.URLField(blank=True),
         ),
         migrations.AlterField(
-            model_name='products',
+            model_name='library',
             name='description_product',
             field=models.CharField(blank=True, max_length=200),
         ),
         migrations.AlterField(
-            model_name='products',
+            model_name='library',
             name='link_product',
             field=models.URLField(blank=True),
         ),
         migrations.AlterField(
-            model_name='products',
+            model_name='library',
             name='nutriscore_product',
             field=models.SmallIntegerField(blank=True, choices=[(0, 'N/A'), (1, 'A'), (2, 'B'), (3, 'C'), (4, 'D'), (5, 'E')], default=0),
         ),
         migrations.AlterField(
-            model_name='products',
+            model_name='library',
             name='store_product',
             field=models.CharField(blank=True, max_length=200),
         ),

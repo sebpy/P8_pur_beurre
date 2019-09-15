@@ -10885,3 +10885,40 @@ h1.product-detail {
     z-index: 10;
     top: 15px;
 }
+
+.login {
+    width: 100%;
+    padding: 3em;
+    background-color: #345a61;
+    margin: auto;
+    color: white;
+    text-transform: uppercase;
+}
+
+#id_password {
+    width:100%;
+}
+
+#id_username {
+    width:100%;
+}
+
+.w-100 {
+    width:100%;
+}
+
+.login-header {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.login-footer {
+    margin-top: 15px;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.login-footer a {
+    color:white;
+}
+
