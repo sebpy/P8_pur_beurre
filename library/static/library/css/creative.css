@@ -10685,6 +10685,14 @@ header.masthead {
   background-size: cover;
 }
 
+header.masthead-profile {
+  background-image: url("../img/header.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
 header.masthead h1 {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #848181;
@@ -10713,6 +10721,10 @@ header.masthead h1 {
 
 @media (max-width: 450px) {
     h1.product-detail {
+        margin-top: 35% !important;
+    }
+
+    h1.profile {
         margin-top: 35% !important;
     }
 }
@@ -10857,6 +10869,15 @@ h1.product-detail {
     background-color: rgba(6,6,6,0.73);
     padding: 2% 0% 2% 0%;
     border-radius: 10px;
+}
+
+h1.profile {
+    font-size: 2rem !important;
+    margin-top: 18%;
+    background-color: rgba(6,6,6,0.73);
+    padding: 2% 0% 2% 0%;
+    border-radius: 10px;
+    margin-bottom:10%;
 }
 
 .head-product {

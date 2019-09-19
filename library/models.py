@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class ProductCategorie(models.Model):
@@ -26,6 +27,5 @@ class Product(models.Model):
 
 
 class UserSaveProduct(models.Model):
-    id_user = models.IntegerField(null=True)
-    id_product = models.IntegerField(null=True)
-    save_product = models.ForeignKey(ProductCategorie, on_delete=models.CASCADE)
+    id_user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)

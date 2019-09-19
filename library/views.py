@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db import IntegrityError
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
-from .models import Product
+from .models import Product, UserSaveProduct
 from .forms import LoginForm, RegisterForm
 
 
@@ -103,8 +104,13 @@ def logout_user(request):
     return render(request, 'library/index.html')
 
 
+@login_required
 def profile(request):
-    return render(request, 'library/profile.html')
+    context = {
+        "username": request.user.username,
+        "email": request.user.email
+    }
+    return render(request, 'library/profile.html', context)
 
 
 def register(request):
@@ -124,11 +130,10 @@ def register(request):
                     messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
                                             'Les mot de passe sont différent', extra_tags='safe')
                 else:
-                    user = User.objects.create_user(username=username,
-                                                    email=email,
-                                                    password=password1)
+                    User.objects.create_user(username=username,
+                                             email=email,
+                                             assword=password1)
 
-                    User.objects.create(user=user)
                     user = authenticate(request, username=username, password=password1)
                     if user:
                         login(request, user)
@@ -148,3 +153,40 @@ def register(request):
         return render(request, 'library/register.html', context)
 
     return render(request, 'library/register.html', context)
+
+
+@login_required
+def save_product(request):
+    product_id = request.GET.get('id')
+    product = get_object_or_404(Product, pk=product_id)
+    user_id = request.user.id
+    save_user = get_object_or_404(Product, pk=user_id)
+
+    try:
+        save = UserSaveProduct.objects.create(
+            id_user=save_user,
+            id_product=product,
+        )
+        save.save()
+
+    except Exception as ex:
+        print(str(ex))
+        msg = "\n\nInsertion error"
+        print(msg)
+
+    context = {
+        'name_product': product.name_product,
+        'nutriscore_product': product.nutriscore_product,
+        'fat_100g': product.fat_100g,
+        'sugars_100g': product.sugars_100g,
+        'saturated_fat_100g': product.saturated_fat_100g,
+        'salt_100g': product.salt_100g,
+        'image_product': product.image_product,
+        'link_product': product.link_product
+    }
+    return render(request, 'library/save.html', context)
+
+
+@login_required
+def read_user_list(request):
+    pass

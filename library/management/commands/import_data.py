@@ -27,7 +27,7 @@ class Command(BaseCommand):
             get_data = get_data_api(url)
             for data in get_data["tags"]:
 
-                if data["library"] in range(55, 60) and 'en:' in data['id']:
+                if data["products"] in range(55, 60) and 'en:' in data['id']:
                     category = ProductCategorie.objects.create(name_category=data["name"], link_category=data["url"])
                     category.save()
 
@@ -42,7 +42,7 @@ class Command(BaseCommand):
                 categories_pages = url_json + "/" + str(page+1) + ".json"
                 get_data_categories = get_data_api(categories_pages)
 
-                for product in get_data_categories["library"]:
+                for product in get_data_categories["products"]:
 
                     try:
                         product_mane = product["product_name_fr"]

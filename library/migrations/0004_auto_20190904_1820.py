@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='library',
+            model_name='products',
             name='id_categories',
             field=models.SmallIntegerField(),
         ),
