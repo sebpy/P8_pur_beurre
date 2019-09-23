@@ -567,11 +567,25 @@ pre code {
   .container {
     max-width: 540px;
   }
+  .nav-item a {
+    text-align: center;
+    color:white !important;
+  }
+  .form-inline .input-group, .form-inline .custom-select {
+        width:100% !important;
+  }
 }
 
 @media (min-width: 768px) {
   .container {
     max-width: 720px;
+  }
+  .nav-item a {
+    text-align: center;
+    color:white !important;
+  }
+  .form-inline .input-group, .form-inline .custom-select {
+        width:100% !important;
   }
 }
 
@@ -1953,6 +1967,25 @@ pre code {
 }
 
 @media (max-width: 575.98px) {
+    h1, .h1 {
+      font-size: 2rem;
+    }
+
+    h2, .h2 {
+      font-size: 1rem;
+    }
+    .container{
+        width:95%;
+    }
+
+    .nav-item ul {
+        display:none;
+    }
+
+    .nav-item li {
+        display:inline-block;
+    }
+
   .table-responsive-sm {
     display: block;
     width: 100%;
@@ -1961,6 +1994,9 @@ pre code {
   }
   .table-responsive-sm > .table-bordered {
     border: 0;
+  }
+  h1.product-save {
+    font-size: 1rem !important;
   }
 }
 
@@ -1973,6 +2009,9 @@ pre code {
   }
   .table-responsive-md > .table-bordered {
     border: 0;
+  }
+  h1.product-save {
+    font-size: 1rem !important;
   }
 }
 
@@ -3730,6 +3769,7 @@ input[type="button"].btn-block {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 48px;
 }
 
 .input-group-prepend .btn,
@@ -10604,6 +10644,7 @@ hr.light {
 
 .page-section {
   padding: 5rem 0;
+  margin-bottom:15px;
 }
 
 #mainNav {
@@ -10727,6 +10768,14 @@ header.masthead h1 {
     h1.profile {
         margin-top: 35% !important;
     }
+    h1.product-save {
+        font-size: 1rem !important;
+    }
+    .nav-item a {
+        text-align: center;
+        color:white !important;
+    }
+    }
 }
 
 #portfolio .container-fluid {
@@ -10781,7 +10830,10 @@ header.masthead h1 {
 }
 
 .footer {
+    position:fixed;
+    bottom:0;
     padding:10px;
+    width:100%;
     background-color:#345a61;
     color: white !important;
 }
@@ -10866,6 +10918,13 @@ header.masthead h1 {
 h1.product-detail {
     font-size: 2rem !important;
     margin-top: 18%;
+    background-color: rgba(6,6,6,0.73);
+    padding: 2% 0% 2% 0%;
+    border-radius: 10px;
+}
+
+.product-save {
+    font-size: 2rem !important;
     background-color: rgba(6,6,6,0.73);
     padding: 2% 0% 2% 0%;
     border-radius: 10px;

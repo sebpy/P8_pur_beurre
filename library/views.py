@@ -85,7 +85,11 @@ def login_user(request):
                 messages.success(request, '<strong><i class="fas fa-exclamation-triangle"></i> Succès!</strong><br>'
                                           'Vous êtes connecté avec succès.', extra_tags='safe')
 
-                return render(request, 'library/profile.html')
+                context = {
+                    "username": request.user.username,
+                    "email": request.user.email,
+                }
+                return render(request, 'library/profile.html', context)
 
             else:
                 messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
@@ -108,7 +112,7 @@ def logout_user(request):
 def profile(request):
     context = {
         "username": request.user.username,
-        "email": request.user.email
+        "email": request.user.email,
     }
     return render(request, 'library/profile.html', context)
 
@@ -132,13 +136,17 @@ def register(request):
                 else:
                     User.objects.create_user(username=username,
                                              email=email,
-                                             assword=password1)
+                                             password=password1)
 
                     user = authenticate(request, username=username, password=password1)
                     if user:
                         login(request, user)
 
-                        return render(request, 'library/profile.html')
+                        context = {
+                            "username": request.user.username,
+                            "email": request.user.email,
+                        }
+                        return render(request, 'library/profile.html', context)
                     else:
                         messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
                                                 'Vous devez remplir tous les champs.', extra_tags='safe')
@@ -159,13 +167,12 @@ def register(request):
 def save_product(request):
     product_id = request.GET.get('id')
     product = get_object_or_404(Product, pk=product_id)
-    user_id = request.user.id
-    save_user = get_object_or_404(Product, pk=user_id)
-
+    user = request.user.id
+    save_user = get_object_or_404(User, pk=user)
     try:
         save = UserSaveProduct.objects.create(
-            id_user=save_user,
-            id_product=product,
+            user_id=save_user,
+            product_id=product
         )
         save.save()
 
@@ -189,4 +196,17 @@ def save_product(request):
 
 @login_required
 def read_user_list(request):
-    pass
+    profile_id = request.user.id
+    query = UserSaveProduct.objects.filter(user_id=profile_id)
+
+    if not query:
+        messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> ERREUR!</strong><br>'
+                                'Vous n\'avez sauvegardé aucun aliment.', extra_tags='safe')
+
+        return render(request, 'library/index.html')
+
+    else:
+        context = {
+            'products': query,
+        }
+        return render(request, 'library/saved.html', context)

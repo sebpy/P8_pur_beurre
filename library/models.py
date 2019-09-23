@@ -11,7 +11,6 @@ class ProductCategorie(models.Model):
 
 
 class Product(models.Model):
-
     name_product = models.CharField(max_length=250)
     categorie = models.ForeignKey(ProductCategorie, on_delete=models.CASCADE)
     nutriscore_product = models.CharField(max_length=1, blank=False)
@@ -27,5 +26,5 @@ class Product(models.Model):
 
 
 class UserSaveProduct(models.Model):
-    id_user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
-    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
