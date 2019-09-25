@@ -10838,6 +10838,10 @@ header.masthead h1 {
     color: white !important;
 }
 
+.footer a {
+    color:white;
+}
+
 .input-group-lg {
     height: calc(1.5em + 1rem + 2px);
 }

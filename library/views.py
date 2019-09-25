@@ -14,6 +14,10 @@ def index(request):
     return render(request, 'library/index.html')
 
 
+def legal_notice(request):
+    return render(request, 'library/legal-notice.html')
+
+
 def detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     context = {
@@ -39,7 +43,7 @@ def search(request):
         return render(request, 'library/index.html')
 
     else:
-        products = Product.objects.filter(name_product__icontains=query)
+        products = Product.objects.filter(name_product__icontains=query).order_by('nutriscore_product')
 
         paginator = Paginator(products, 9)
         page = request.GET.get('page')

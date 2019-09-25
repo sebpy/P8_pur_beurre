@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^logout/$', views.logout_user, name='logout'),
     url(r'^save/$', views.save_product, name='save'),
     url(r'^saved/$', views.read_user_list, name='saved'),
+    url(r'^legal-notice/$', views.legal_notice, name='legal_notice'),
 ]
