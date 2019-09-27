@@ -1,3 +1,5 @@
+""" View file for module Library """
+
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -11,14 +13,17 @@ from .forms import LoginForm, RegisterForm
 
 
 def index(request):
+    """ Display index """
     return render(request, 'library/index.html')
 
 
 def legal_notice(request):
+    """ Display legal Notice """
     return render(request, 'library/legal-notice.html')
 
 
 def detail(request, product_id):
+    """ Display detail product """
     product = get_object_or_404(Product, pk=product_id)
     context = {
         'name_product': product.name_product,
@@ -34,16 +39,18 @@ def detail(request, product_id):
 
 
 def search(request):
-
+    """ Display search product """
     query = request.GET.get('query', '')
     if not query:
-        messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> ERREUR!</strong><br>'
+        messages.error(request, '<strong><i class="fas fa-exclamation-triangle">'
+                                '</i> ERREUR!</strong><br>'
                                 'Vous devez entrer un aliment à rechercher.', extra_tags='safe')
 
         return render(request, 'library/index.html')
 
-    else:
-        products = Product.objects.filter(name_product__icontains=query).order_by('nutriscore_product')
+    if query:
+        products = Product.objects.filter(name_product__icontains=query)\
+            .order_by('nutriscore_product')
 
         paginator = Paginator(products, 9)
         page = request.GET.get('page')
@@ -64,6 +71,7 @@ def search(request):
 
 
 def login_page(request):
+    """ Display login page """
     form_login = LoginForm()
     context = {
         "formLogin": form_login,
@@ -72,6 +80,7 @@ def login_page(request):
 
 
 def login_user(request):
+    """ Function for user login """
     form_login = LoginForm()
     context = {
         "formLogin": form_login,
@@ -86,7 +95,8 @@ def login_user(request):
 
             if user is not None:
                 login(request, user)
-                messages.success(request, '<strong><i class="fas fa-exclamation-triangle"></i> Succès!</strong><br>'
+                messages.success(request, '<strong><i class="fas fa-exclamation-triangle">'
+                                          '</i> Succès!</strong><br>'
                                           'Vous êtes connecté avec succès.', extra_tags='safe')
 
                 context = {
@@ -95,8 +105,9 @@ def login_user(request):
                 }
                 return render(request, 'library/profile.html', context)
 
-            else:
-                messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
+            if not user:
+                messages.error(request, '<strong><i class="fas fa-exclamation-triangle">'
+                                        '</i> Erreur!</strong><br>'
                                         'Login ou mot de passe invalide.', extra_tags='safe')
 
                 return render(request, 'library/login.html', context)
@@ -105,8 +116,10 @@ def login_user(request):
 
 
 def logout_user(request):
+    """ Function for user logout """
     logout(request)
-    messages.success(request, '<strong><i class="fas fa-exclamation-triangle"></i> Succès!</strong><br>'
+    messages.success(request, '<strong><i class="fas fa-exclamation-triangle">'
+                              '</i> Succès!</strong><br>'
                               'Vous avez été déconnecté avec succès.', extra_tags='safe')
 
     return render(request, 'library/index.html')
@@ -114,6 +127,7 @@ def logout_user(request):
 
 @login_required
 def profile(request):
+    """ Display User profile """
     context = {
         "username": request.user.username,
         "email": request.user.email,
@@ -122,6 +136,7 @@ def profile(request):
 
 
 def register(request):
+    """ Function for register """
     form_register = RegisterForm()
     context = {
         "formRegister": form_register
@@ -135,7 +150,8 @@ def register(request):
                 password2 = form.cleaned_data.get('password2')
                 email = form.cleaned_data.get('email')
                 if password2 != password1:
-                    messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
+                    messages.error(request, '<strong><i class="fas fa-exclamation-triangle">'
+                                            '</i> Erreur!</strong><br>'
                                             'Les mot de passe sont différent', extra_tags='safe')
                 else:
                     User.objects.create_user(username=username,
@@ -151,15 +167,18 @@ def register(request):
                             "email": request.user.email,
                         }
                         return render(request, 'library/profile.html', context)
-                    else:
-                        messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
-                                                'Vous devez remplir tous les champs.', extra_tags='safe')
+                    if not user:
+                        messages.error(request, '<strong><i class="fas fa-exclamation-triangle">'
+                                                '</i> Erreur!</strong><br>'
+                                                'Vous devez remplir tous les champs.',
+                                       extra_tags='safe')
 
         else:
             return render(request, 'library/register.html', context)
 
     except IntegrityError:
-        messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> Erreur!</strong><br>'
+        messages.error(request, '<strong><i class="fas fa-exclamation-triangle">'
+                                '</i> Erreur!</strong><br>'
                                 'Cette utilisateur existe déjà.', extra_tags='safe')
 
         return render(request, 'library/register.html', context)
@@ -169,6 +188,7 @@ def register(request):
 
 @login_required
 def save_product(request):
+    """ Function for save product """
     product_id = request.GET.get('id')
     product = get_object_or_404(Product, pk=product_id)
     user = request.user.id
@@ -200,16 +220,19 @@ def save_product(request):
 
 @login_required
 def read_user_list(request):
+    """ Function for display saved products for current user """
+
     profile_id = request.user.id
     query = UserSaveProduct.objects.filter(user_id=profile_id)
 
     if not query:
-        messages.error(request, '<strong><i class="fas fa-exclamation-triangle"></i> ERREUR!</strong><br>'
+        messages.error(request, '<strong><i class="fas fa-exclamation-triangle">'
+                                '</i> ERREUR!</strong><br>'
                                 'Vous n\'avez sauvegardé aucun aliment.', extra_tags='safe')
 
         return render(request, 'library/index.html')
 
-    else:
+    if query:
         context = {
             'products': query,
         }

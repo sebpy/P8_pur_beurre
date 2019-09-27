@@ -2,7 +2,7 @@ django
 psycopg2
 Argon2
 requests
-pylint
+pylint-django
 pytest
 pytest-cov
 django-debug-toolbar
