@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b8a15f77-78f9-4d4d-a19b-54c7bf9f6114" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/pur_beurre/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pur_beurre/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="b8a15f77-78f9-4d4d-a19b-54c7bf9f6114" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +52,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pur_beurre/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="349">
@@ -62,6 +60,15 @@
               <folding>
                 <element signature="e#311#368#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/library/dumps/dump.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret column="1491574" selection-start-column="1491574" selection-end-column="1491574" />
             </state>
           </provider>
         </entry>
@@ -157,6 +164,7 @@
         <option value="$PROJECT_DIR$/static/.gitignore" />
         <option value="$PROJECT_DIR$/runtime.txt" />
         <option value="$PROJECT_DIR$/pur_beurre/settings.py" />
+        <option value="$PROJECT_DIR$/library/dumps/dump.json" />
       </list>
     </option>
   </component>
@@ -177,6 +185,22 @@
             <path>
               <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
               <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
+              <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
+              <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+              <item name="dumps" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
+              <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+              <item name="pur_beurre" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -501,6 +525,13 @@
           <folding>
             <element signature="e#311#368#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/dumps/dump.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret column="1491574" selection-start-column="1491574" selection-end-column="1491574" />
         </state>
       </provider>
     </entry>
