@@ -84,29 +84,16 @@ ROOT_URLCONF = 'pur_beurre.urls'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-if os.environ.get('ENV') == 'PRODUCTION':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'pur_beurre',
-            'USER': 'postgres',
-            'PASSWORD': 'Azerty',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pur_beurre',
+        'USER': 'postgres',
+        'PASSWORD': 'Azerty',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'pur_beurre',
-            'USER': 'postgres',
-            'PASSWORD': 'Azerty',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+}
 
 
 
@@ -157,7 +144,6 @@ if os.environ.get('ENV') == 'PRODUCTION':
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.9/howto/static-files/
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_URL = '/static/'
 
     # Extra places for collectstatic to find static files.
     STATICFILES_DIRS = (
