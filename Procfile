@@ -1,1 +1,1 @@
-web: gunicorn P8_pur_beurre.wsgi
+web: gunicorn libray.wsgi
