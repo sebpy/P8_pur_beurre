@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8a15f77-78f9-4d4d-a19b-54c7bf9f6114" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/library/static/library/img/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku-0.3.1.dist-info/DESCRIPTION.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku-0.3.1.dist-info/INSTALLER" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku-0.3.1.dist-info/METADATA" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku-0.3.1.dist-info/RECORD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku-0.3.1.dist-info/WHEEL" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku-0.3.1.dist-info/metadata.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku-0.3.1.dist-info/top_level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku/__version__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.6/site-packages/django_heroku/core.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pur_beurre/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/pur_beurre/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -188,6 +198,32 @@
             <path>
               <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
               <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
+              <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
+              <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
+              <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
+              <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="library" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
