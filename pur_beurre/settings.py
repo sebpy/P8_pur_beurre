@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 from django.contrib.messages import constants as messages
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,10 +24,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'g5wdqq6$^o!k@o5o61ngjqu-03i9e#i(zg(!)6*t)4vn#pap+#'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: don't run with debug turned on in production!
+
+if os.environ.get('ENV') == 'PRODUCTION':
+    DEBUG = False
+    ALLOWED_HOSTS = ['pur-beurre-website.herokuapp.com']
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ['127.0.0.1']
+
 
 
 # Application definition
@@ -52,9 +59,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'whitenoise.middleware.WithNoiseMiddleware'
 ]
-
-ROOT_URLCONF = 'pur_beurre.urls'
 
 TEMPLATES = [
     {
@@ -74,20 +80,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 
+ROOT_URLCONF = 'pur_beurre.urls'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pur_beurre',
-        'USER': 'postgres',
-        'PASSWORD': 'Azerty',
-        'HOST': 'localhost',
-        'PORT': '5432',
+if os.environ.get('ENV') == 'PRODUCTION':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'pur_beurre',
+            'USER': 'postgres',
+            'PASSWORD': 'Azerty',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'pur_beurre',
+            'USER': 'postgres',
+            'PASSWORD': 'Azerty',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
+
 
 
 # Password validation
@@ -130,6 +150,18 @@ STATIC_URL = '/static/'
 LOGOUT_REDIRECT_URL = '/'
 INTERNAL_IPS = ['127.0.0.1']
 
+
+if os.environ.get('ENV') == 'PRODUCTION':
+    PROJECT_ROOT = os.path.dirname((os.path.abspath(__file__)))
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+    STATICFILES_DIRS = (
+        os.path.join(PROJECT_ROOT, 'static')
+    )
+
+    STATICFILES_STORAGE = 'whitenoise.storge.CompressedManifestStaticFilesStorage'
+
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
 
 MESSAGE_TAGS = {
     messages.SUCCESS: 'alert alert-success pop',

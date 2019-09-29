@@ -1,2 +1,13 @@
-[paths]
-source = ./library/tests.py
+[run]
+branch = True
+source =
+    library
+
+omit =
+    *__init__.py*
+    *manangement/
+    *migrations*
+    *import_data.py*
+
+[report]
+ignore_errors = True
