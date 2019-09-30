@@ -30,13 +30,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'g5wdqq6$^o!k@o5o61ngjqu-03i9e#i(zg(!)
 
 if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
-    ALLOWED_HOSTS = ['pur-beurre-website.herokuapp.com']
 
 else:
     DEBUG = True
-    ALLOWED_HOSTS = ['127.0.0.1']
 
-
+ALLOWED_HOSTS = ['127.0.0.1', 'pur-beurre-website.herokuapp.com']
 
 # Application definition
 
