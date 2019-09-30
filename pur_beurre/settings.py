@@ -84,28 +84,16 @@ ROOT_URLCONF = 'pur_beurre.urls'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-if os.environ.get('ENV') == 'PRODUCTION':
-    DATABASES = {
+DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'd93pvbhrtj7hii',
-            'USER': 'tstazzawsfiofz',
-            'PASSWORD': 'ec514b2ad908586503fea8615ac4b99407e63990b4f0a5c218c0b1ae814ff2a0',
-            'HOST': 'ec2-107-21-201-238.compute-1.amazonaws.com',
-            'PORT': '5432',
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pur_beurre',
+        'USER': 'postgres',
+        'PASSWORD': 'Azerty',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'pur_beurre',
-            'USER': 'postgres',
-            'PASSWORD': 'Azerty',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -147,7 +135,7 @@ USE_TZ = True
 LOGOUT_REDIRECT_URL = '/'
 INTERNAL_IPS = ['127.0.0.1']
 
-#STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 if os.environ.get('ENV') == 'PRODUCTION':
 
