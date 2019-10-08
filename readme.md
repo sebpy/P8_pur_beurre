@@ -1,4 +1,4 @@
-# PurBeurre
+# Prject 8: Pur Beurre
 
 PurBeurre is a website application running on Django. The objective of the app is to purpose a database of products (linked with the OpenFoodFacts database) and to help users in finding a healthy substitute of a product.
 
