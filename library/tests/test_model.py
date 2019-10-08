@@ -1,9 +1,9 @@
 from django.urls import reverse
 from django.test import TestCase, RequestFactory, Client
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 from library.models import ProductCategorie, Product, UserSaveProduct
-from library.views import profile
 
 
 class DetailPageProduct(TestCase):
@@ -51,14 +51,34 @@ class LoginUserTestCase(TestCase):
         self.user = User.objects.get(username='Test')
 
     def test_login_user(self):
-        request = self.factory.get(reverse('profile'))
-        request.user = self.user
-        response = profile(request)
+        client = Client()
+        response = client.post('/library/login/', {'username': 'Test', 'password': 'testdjango'})
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'test@django.fr')
+        response = client.get('/library/profile/')
+        self.assertContains(response, 'Test')
 
 
-class TestSaveTestCase(TestCase):
+class RegisterUserTestCase(TestCase):
+
+    def setUp(self):
+        self.factory = RequestFactory()
+        User.objects.create_user(username="Test",
+                                 email="test@django.fr",
+                                 password="testdjango")
+
+        self.user = User.objects.get(username='Test')
+
+    def test_register_user(self):
+        client = Client()
+        response = client.post('/library/register/', {'username': 'Test', 'password': 'testdjango', 'email': 'test@django.fr'})
+        self.assertEqual(response.status_code, 200)
+        response = client.post('/library/login/', {'username': 'Test', 'password': 'testdjango'})
+        self.assertEqual(response.status_code, 200)
+        response = client.get('/library/profile/')
+        self.assertContains(response, 'Test')
+
+
+class SaveTestCase(TestCase):
     def setUp(self):
         User.objects.create_user(username="Test",
                                  email="test@django.fr",
@@ -101,7 +121,7 @@ class TestSaveTestCase(TestCase):
         assert response.status_code == 200
 
 
-class TestSearchTestCase(TestCase):
+class SearchTestCase(TestCase):
     def setUp(self):
         ProductCategorie.objects.create(name_category='Chocolat au Caramel',
                                         link_category='https://fr.openfoodfacts.org/categorie/chocolats-au-caramel')
@@ -131,3 +151,49 @@ class TestSearchTestCase(TestCase):
         )
         self.assertNumQueries(1)
         assert response.status_code == 200
+
+
+class SavedProductsTestCase(TestCase):
+    def setUp(self):
+        User.objects.create_user(username="Test",
+                                 email="test@django.fr",
+                                 password="testdjango")
+
+        self.user = User.objects.get(username='Test')
+
+        ProductCategorie.objects.create(name_category='Chocolat au Caramel',
+                                        link_category='https://fr.openfoodfacts.org/categorie/chocolats-au-caramel')
+
+        self.category = ProductCategorie.objects.get(name_category='Chocolat au Caramel')
+
+        Product.objects.create(
+            name_product='Chocalat caramel',
+            categorie_id=self.category.id,
+            nutriscore_product='E',
+            fat_100g='30.7',
+            sugars_100g='56.8',
+            saturated_fat_100g='18.4',
+            salt_100g='0.3',
+            image_product='https://static.openfoodfacts.org/images/products/541/312/136/2639/front_fr.10.400.jpg',
+            link_product='https://fr.openfoodfacts.org/produit/5413121362639/chocolat-lait-caramel-sale-fair-trade',
+        )
+
+        self.product = Product.objects.get(name_product='Chocalat caramel')
+
+        product = get_object_or_404(Product, pk=self.product.id)
+        user = self.user.id
+        save_user = get_object_or_404(User, pk=user)
+
+        self.save = UserSaveProduct.objects.create(
+            user_id=save_user,
+            product_id=product
+        )
+
+    def test_search(self):
+        client = Client()
+        response = client.post('/library/login/', {'username': 'Test', 'password': 'testdjango'})
+        self.assertEqual(response.status_code, 200)
+        response = client.get('/library/saved/')
+        self.assertContains(response, 'Chocalat caramel')
+
+
