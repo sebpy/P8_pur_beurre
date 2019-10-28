@@ -41,3 +41,4 @@ wcwidth==0.1.7
 whitenoise==4.1.4
 wrapt==1.11.2
 zipp==0.5.2
+sentry-sdk==0.13.1
