@@ -54,6 +54,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="645">
+              <caret line="43" selection-start-line="43" selection-end-line="43" />
+=======
+        <entry file="file://$PROJECT_DIR$/pur_beurre/settings/travis.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+>>>>>>> staging
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/library/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+=======
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="645">
@@ -65,6 +90,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/models.py">
           <provider selected="true" editor-type-id="text-editor">
+>>>>>>> staging
             <state relative-caret-position="435">
               <caret line="30" selection-start-line="30" selection-end-line="30" />
               <folding>
@@ -199,6 +225,7 @@
               <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
               <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
             <path>
               <item name="P8_pur_beurre" type="b2602c69:ProjectViewProjectNode" />
               <item name="P8_pur_beurre" type="462c0819:PsiDirectoryNode" />
@@ -210,6 +237,8 @@
               <item name="pur_beurre" type="462c0819:PsiDirectoryNode" />
               <item name="settings" type="462c0819:PsiDirectoryNode" />
             </path>
+=======
+>>>>>>> staging
           </expand>
           <select />
         </subPane>
@@ -246,7 +275,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="-1" width="1924" height="955" extended-state="6" />
+<<<<<<< HEAD
     <editor active="true" />
+=======
+>>>>>>> staging
     <layout>
       <window_info id="Structure" order="0" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.13691416" />
@@ -593,11 +625,24 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/travis.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/pur_beurre/settings/travis.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+=======
+    <entry file="file://$PROJECT_DIR$/pur_beurre/settings/travis.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> staging
   </component>
 </project>
