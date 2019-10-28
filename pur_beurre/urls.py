@@ -16,11 +16,17 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls import include, url
+from django.urls import path
 from django.contrib import admin
 
 from library import views
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
 urlpatterns = [
+    path('sentry-debug/', trigger_error),
     url(r'^$', views.index),
     url(r'^library/', include('library.urls')),
     url(r'^admin/', admin.site.urls),
