@@ -17,5 +17,3 @@ service:
 # command to run tests
 script:
    - ./manage.py test
-
-#
